@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1644734525 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\main.cpp
+1644735806 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\main.cpp
 	<bits/stdc++.h>
 	"regression.h"
 
-1644734525 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.h
+1644735806 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.h
 
 1644734195 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\plz.h
 
-1644734525 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.cpp
+1644869722 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.cpp
 	<bits/stdc++.h>
 	"regression.h"
 
