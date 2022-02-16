@@ -7,13 +7,55 @@
 using namespace std;
 void ShowData(FILE *fp)
 {
+    vector<string>s;
+    vector<double>x;
+    vector<double>y;
+    vector<pair<double,double>>xy;
+
     char str[1000];
+    int line=0;
      while(fscanf(fp,"%[^\n]\n",str)!=EOF)
     {
         cout<<str<<endl;
+
+        line++;
+        if(line!=1)
+        {
+            stringstream data(str);
+
+            string reg;
+
+            while(data>>reg)
+            {
+                //cout<<reg<<" ";
+                s.push_back(reg);
+            }
+        }
     }
 
+    for(int i=0;i<s.size();i=i+2)
+    {
+        double n;
+        n=std:: stof(s[i]);
+        x.push_back(n);
+        //cout<<n<<endl;
+    }
+
+     for(int j=1;j<s.size();j=j+2)
+    {
+        double m;
+        m=std:: stof(s[j]);
+        y.push_back(m);
+        //cout<<n<<endl;
+    }
+    /*for(int i=0;i<x.size();i++)
+        cout<<x[i]<<" ";
+
+        for(int i=0;i<y.size();i++)
+        cout<<y[i]<<" ";*/
+
 }
+
 void reg_input()
 {
     FILE *fp;
@@ -37,6 +79,6 @@ void reg_input()
     {
 
     }*/
-
+    //split_data(fp);
 
 }
