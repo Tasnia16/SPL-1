@@ -3,14 +3,44 @@
 #include<vector>
 #include<sstream>
 #include<string>
+#include<math.h>
 #include"regression.h"
 using namespace std;
+
+void calculation(const vector<double>&x , const vector<double>&y)
+{
+     double sum_x=0.0;
+     double sum_y=0.0;
+     double sum_x_square=0.0;
+     double sum_y_square=0.0;
+     double sum_xy=0.0;
+
+     for(int i=0;i<x.size();i++)
+     {
+         sum_x=sum_x+x[i];
+     }
+
+     for(int i=0;i<y.size();i++)
+     {
+         sum_y=sum_y+y[i];
+     }
+
+     for(int i=0;i<x.size();i++)
+     {
+         sum_x_square=sum_x_square+pow(x[i],2);
+     }
+     for(int i=0;i<y.size();i++)
+     {
+         sum_y_square=sum_y_square+pow(y[i],2);
+     }
+
+}
+
 void ShowData(FILE *fp)
 {
     vector<string>s;
     vector<double>x;
     vector<double>y;
-    vector<pair<double,double>>xy;
 
     char str[1000];
     int line=0;
@@ -48,6 +78,8 @@ void ShowData(FILE *fp)
         y.push_back(m);
         //cout<<n<<endl;
     }
+
+    calculation(x,y);
     /*for(int i=0;i<x.size();i++)
         cout<<x[i]<<" ";
 
