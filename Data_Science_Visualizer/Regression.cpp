@@ -4,16 +4,76 @@
 #include<sstream>
 #include<string>
 #include<math.h>
+#include<cstring>
 #include"regression.h"
 using namespace std;
+void correlation_coeeficient_interpretation(double r,const vector<string>&variable)
+{
+    if(r==0)
+        cout<<"There is no linear relationship between "<<variable[0]<<" and "<<variable[1]<<endl;
+
+    else if(r>0)
+    {
+        cout<<"Trend of the fitted line is upward."<<endl;
+        if(r>0.5)
+            cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+
+        else if(r<0.5)
+              cout<<"There is a weak positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+        else
+               cout<<"There is a moderate positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+    }
+
+    else if(r<0)
+    {
+        cout<<"trend of the fitted line is downward ."<<endl;
+         if(abs(r)>0.5)
+            cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+
+        else if(abs(r)<0.5)
+              cout<<"There is a weak positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+        else
+               cout<<"There is a moderate positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+    }
+}
+
+void power_determine_interpretation(double power_determine,const vector<string>&variable, int button)
+{
+  if(button==1)
+    {
+        cout<<100*power_determine<<"% of"<<variable[1]<<" can be explained by "<<variable[0]<<endl;
+    }
+
+    else if(button==2)
+    {
+        cout<<100*power_determine<<"% of "<<variable[0]<<" can be explained by "<<variable[1]<<endl;
+    }
+}
+
+void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum_x_square,double sum_y_square,double n,const vector<string>&variable,int button)
+{
+    double r;
+     double power_determine=0.0;
+    r=(sum_xy-((sum_x*sum_y)/n))/sqrt((sum_x_square-(pow(sum_x,2)/n))*(sum_y_square-((pow(sum_y,2))/n)) );
+
+     power_determine=pow(r,2);
+    cout<<"The correlation coefficient is: "<<r<<endl;
+    cout<<"Interpretation by correlation coefficient is :"<<endl;
+    correlation_coeeficient_interpretation(r,variable);
+
+    cout<<"Power of determination is :" << power_determine<<endl;
+    cout<<"Interpretation by power of determination is :"<<endl;
+    power_determine_interpretation(power_determine,variable,button);
+
+}
 
 void regression_line(double alpha,double beta)
 {
     cout<<"The best fitted line is :"<<endl;
-    cout<<"y = "<<alpha<<" "<<"+"<<" "<<beta<<"x";
+    cout<<"y = "<<alpha<<" "<<"+"<<" "<<beta<<"x"<<endl;
 }
 
-void calculation(const vector<double>&x , const vector<double>&y)
+void calculation(const vector<double>&x , const vector<double>&y,const vector<string>&variable,int button)
 {
      double sum_x=0.0;
      double sum_y=0.0;
@@ -24,8 +84,11 @@ void calculation(const vector<double>&x , const vector<double>&y)
      double mean_y=0.0;
      double alpha=0.0;
      double beta=0.0;
+
+     double alpha2=0.0;
+     double beta2=0.0;
+
      double correlation=0.0;
-     double power_determine=0.0;
 
      vector<pair<double,double>>xy;
 
@@ -68,17 +131,24 @@ void calculation(const vector<double>&x , const vector<double>&y)
      //cout<<beta;
      alpha=mean_y-(beta*mean_x);
      //cout<<alpha;
-     correlation=(sum_xy-((sum_x*sum_y)/n))/sqrt((sum_x_square-(pow(sum_x,2)/n))*(sum_y_square-((pow(sum_y,2))/n)) );
-     //cout<<correlation;
-     power_determine=pow(correlation,2);
 
-     regression_line(alpha,beta);
+     beta2=(sum_xy-(n*mean_x*mean_y))/(sum_y_square-n*pow(mean_y,2));
+     alpha2=mean_x-(beta2*mean_y);
+
+            if(button==1)
+             regression_line(alpha,beta);
+           else if(button==2)
+             regression_line(alpha2,beta2);
+
+
+     correlation_coeeficient(sum_x,sum_y,sum_xy,sum_x_square,sum_y_square,n,variable,button);
 
 }
 
 void ShowData(FILE *fp)
 {
     vector<string>s;
+    vector<string>variable;
     vector<double>x;
     vector<double>y;
 
@@ -89,7 +159,20 @@ void ShowData(FILE *fp)
         cout<<str<<endl;
 
         line++;
-        if(line!=1)
+        if(line==1)
+
+        {
+             stringstream data1(str);
+
+            string var;
+
+            while(data1>>var)
+            {
+                variable.push_back(var);
+            }
+        }
+
+         else if(line!=1)
         {
             stringstream data(str);
 
@@ -102,6 +185,22 @@ void ShowData(FILE *fp)
             }
         }
     }
+
+    cout<<"The variables are : ";
+    for(int i=0;i<variable.size();i++)
+    {
+        cout<<variable[i]<<endl;
+    }
+    cout<<endl;
+
+    cout<<"Which variable you want to make independent variable : "<<endl;
+     for(int i=0;i<variable.size();i++)
+    {
+        cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
+    }
+    int button;
+    cin>>button;
+
 
     for(int i=0;i<s.size();i=i+2)
     {
@@ -119,7 +218,7 @@ void ShowData(FILE *fp)
         //cout<<n<<endl;
     }
 
-    calculation(x,y);
+    calculation(x,y,variable,button);
     /*for(int i=0;i<x.size();i++)
         cout<<x[i]<<" ";
 
