@@ -7,6 +7,36 @@
 #include<cstring>
 #include"regression.h"
 using namespace std;
+
+     double alpha=0.0;
+     double beta=0.0;
+
+     double alpha2=0.0;
+     double beta2=0.0;
+
+void custom_test(const vector<string>&variable,int button)
+{
+    if(button==1)
+    {
+        double custom_variable1,final_pred;
+        cout<<"\nEnter any  "<<variable[0]<<" for which you want to predict "<<variable[1]<<" : ";
+        cin>>custom_variable1;
+        final_pred=alpha+beta*custom_variable1;
+        cout<<"\nThe "<<variable[1]<<" for "<<variable[0]<<" is :"<<final_pred;
+
+    }
+
+     if(button==2)
+    {
+        double custom_variable2,final_pred2;
+        cout<<"\n****Enter any  "<<variable[1]<<" for which you want to predict "<<variable[0]<<" : ****";
+        cin>>custom_variable2;
+        final_pred2=alpha2+beta2*custom_variable2;
+        cout<<"\nThe "<<variable[0]<<" for "<<variable[1]<<" is :"<<final_pred2;
+
+    }
+}
+
 void correlation_coeeficient_interpretation(double r,const vector<string>&variable)
 {
     if(r==0)
@@ -41,7 +71,7 @@ void power_determine_interpretation(double power_determine,const vector<string>&
 {
   if(button==1)
     {
-        cout<<100*power_determine<<"% of"<<variable[1]<<" can be explained by "<<variable[0]<<endl;
+        cout<<100*power_determine<<"% of "<<variable[1]<<" can be explained by "<<variable[0]<<endl;
     }
 
     else if(button==2)
@@ -57,13 +87,16 @@ void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum
     r=(sum_xy-((sum_x*sum_y)/n))/sqrt((sum_x_square-(pow(sum_x,2)/n))*(sum_y_square-((pow(sum_y,2))/n)) );
 
      power_determine=pow(r,2);
-    cout<<"The correlation coefficient is: "<<r<<endl;
-    cout<<"Interpretation by correlation coefficient is :"<<endl;
+    cout<<"\nThe correlation coefficient is: "<<r<<endl;
+    cout<<"\nInterpretation by correlation coefficient is :"<<endl;
     correlation_coeeficient_interpretation(r,variable);
 
-    cout<<"Power of determination is :" << power_determine<<endl;
-    cout<<"Interpretation by power of determination is :"<<endl;
+    cout<<"\nPower of determination is :" << power_determine<<endl;
+    cout<<"\nInterpretation by power of determination is :"<<endl;
     power_determine_interpretation(power_determine,variable,button);
+
+    //giving specific value
+    custom_test(variable,button);
 
 }
 
@@ -82,11 +115,11 @@ void calculation(const vector<double>&x , const vector<double>&y,const vector<st
      double sum_xy=0.00;
      double mean_x=0.0;
      double mean_y=0.0;
-     double alpha=0.0;
+    /* double alpha=0.0;
      double beta=0.0;
 
      double alpha2=0.0;
-     double beta2=0.0;
+     double beta2=0.0;*/
 
      double correlation=0.0;
 
@@ -151,13 +184,13 @@ void ShowData(FILE *fp)
     vector<string>variable;
     vector<double>x;
     vector<double>y;
-
     char str[1000];
     int line=0;
      while(fscanf(fp,"%[^\n]\n",str)!=EOF)
     {
+        //cout<<"____________________________________\n";
+        //cout<<"|"<<str<<setw(20)<<"|"<<s<<setw(5)<<endl;
         cout<<str<<endl;
-
         line++;
         if(line==1)
 
@@ -193,7 +226,7 @@ void ShowData(FILE *fp)
     }
     cout<<endl;
 
-    cout<<"Which variable you want to make independent variable : "<<endl;
+    cout<<"**********Which variable you want to make independent variable : ********"<<endl;
      for(int i=0;i<variable.size();i++)
     {
         cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
