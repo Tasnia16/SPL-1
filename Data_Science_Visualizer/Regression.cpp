@@ -1,12 +1,20 @@
 #include<bits/stdc++.h>
 #include<stdlib.h>
 #include<vector>
-#include<sstream>
 #include<string>
 #include<math.h>
 #include<cstring>
+#include<windows.h>
 #include"regression.h"
 using namespace std;
+
+COORD coord= {0,0}; // this is global variable
+void gotoxy(int x,int y)
+{
+    coord.X=x;
+    coord.Y=y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
+}
 
      double alpha=0.0;
      double beta=0.0;
@@ -19,20 +27,51 @@ void custom_test(const vector<string>&variable,int button)
     if(button==1)
     {
         double custom_variable1,final_pred;
-        cout<<"\nEnter any  "<<variable[0]<<" for which you want to predict "<<variable[1]<<" : ";
+        cout<<endl;
+        cout<<"Enter any  "<<variable[0]<<" for which you want to predict "<<variable[1]<<" : ";
         cin>>custom_variable1;
         final_pred=alpha+beta*custom_variable1;
         cout<<"\nThe "<<variable[1]<<" for "<<variable[0]<<" is :"<<final_pred;
-
+        cout<<endl;
+        int round_final_pred;
+        round_final_pred=final_pred;
+        double fp=round_final_pred;
+        //cout<<fp<<endl;
+        if(fp==final_pred)
+        {
+            cout<<"The approx : "<<round_final_pred;
+            cout<<endl;
+        }
+        else
+        {
+            cout<<"The approx : "<<round_final_pred+1;
+            cout<<endl;
+        }
     }
 
      if(button==2)
     {
         double custom_variable2,final_pred2;
+        cout<<endl;
         cout<<"\n****Enter any  "<<variable[1]<<" for which you want to predict "<<variable[0]<<" : ****";
         cin>>custom_variable2;
         final_pred2=alpha2+beta2*custom_variable2;
-        cout<<"\nThe "<<variable[0]<<" for "<<variable[1]<<" is :"<<final_pred2;
+        cout<<endl;
+        cout<<"The "<<variable[0]<<" for "<<variable[1]<<" is :"<<final_pred2<<endl;
+        int round_final_pred2;
+        round_final_pred2=final_pred2;
+        double fp2=round_final_pred2;
+        if(fp2==final_pred2)
+        {
+            cout<<"The approx : "<<round_final_pred2;
+            cout<<endl;
+        }
+        else
+        {
+            cout<<"The approx : "<<round_final_pred2+1;
+            cout<<endl;
+        }
+
 
     }
 }
@@ -40,43 +79,74 @@ void custom_test(const vector<string>&variable,int button)
 void correlation_coeeficient_interpretation(double r,const vector<string>&variable)
 {
     if(r==0)
-        cout<<"There is no linear relationship between "<<variable[0]<<" and "<<variable[1]<<endl;
+    {
+        cout<<"There is no linear relationship between "<<variable[0]<<" and "<<variable[1];
+        cout<<endl;
+    }
 
     else if(r>0)
     {
         cout<<"Trend of the fitted line is upward."<<endl;
         if(r>0.5)
+            {
             cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+            }
 
         else if(r<0.5)
-              cout<<"There is a weak positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+             {
+                 cout<<"There is a weak positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+             }
         else
+        {
                cout<<"There is a moderate positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+        }
     }
 
     else if(r<0)
     {
         cout<<"trend of the fitted line is downward ."<<endl;
          if(abs(r)>0.5)
-            cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+            {
+                cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+            }
 
         else if(abs(r)<0.5)
-              cout<<"There is a weak positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+             {
+                 cout<<"There is a weak positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+             }
         else
+        {
                cout<<"There is a moderate positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
+        }
     }
 }
 
 void power_determine_interpretation(double power_determine,const vector<string>&variable, int button)
 {
+    double round=100*power_determine;
+    int extract_int=round;
+    double extract_float;
+    int approax;
+    extract_float=round-extract_int;
+    if(extract_float<0.5)
+    {
+        approax=extract_int;
+    }
+    else
+    {
+        approax=extract_int+1;
+    }
+
   if(button==1)
     {
         cout<<100*power_determine<<"% of "<<variable[1]<<" can be explained by "<<variable[0]<<endl;
+        cout<<"Approx : "<<approax<<"%"<<endl;
     }
 
     else if(button==2)
     {
         cout<<100*power_determine<<"% of "<<variable[0]<<" can be explained by "<<variable[1]<<endl;
+        cout<<"Approx : "<<approax<<"%"<<endl;
     }
 }
 
@@ -102,8 +172,10 @@ void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum
 
 void regression_line(double alpha,double beta)
 {
-    cout<<"The best fitted line is :"<<endl;
+    cout<<endl;
+    cout<<"\nThe best fitted line is :"<<endl;
     cout<<"y = "<<alpha<<" "<<"+"<<" "<<beta<<"x"<<endl;
+    cout<<endl;
 }
 
 void calculation(const vector<double>&x , const vector<double>&y,const vector<string>&variable,int button)
@@ -186,12 +258,19 @@ void ShowData(FILE *fp)
     vector<double>y;
     char str[1000];
     int line=0;
+    int k=21;
      while(fscanf(fp,"%[^\n]\n",str)!=EOF)
     {
         //cout<<"____________________________________\n";
         //cout<<"|"<<str<<setw(20)<<"|"<<s<<setw(5)<<endl;
+        gotoxy(20,k);
+        cout<<"|"<<endl;
+        gotoxy(30,k);
         cout<<str<<endl;
         line++;
+        gotoxy(60,k);
+        cout<<"|"<<endl;
+         k=k+1;
         if(line==1)
 
         {
@@ -218,10 +297,20 @@ void ShowData(FILE *fp)
             }
         }
     }
+    gotoxy(20,k);
+    cout<<"|";
 
-    cout<<"The variables are : ";
+    for(int t=20;t<=60;t++)
+    {
+        gotoxy(t,k);
+        cout<<"-";
+    }
+    cout<<endl;
+
+    cout<<"\nThe variables are : "<<endl;
     for(int i=0;i<variable.size();i++)
     {
+        cout<<i+1<<".";
         cout<<variable[i]<<endl;
     }
     cout<<endl;
@@ -266,18 +355,28 @@ void reg_input()
     //string str;
     /*fp=fopen("regression.txt","w");
     if(fp!=NULL)
+
     {
-        cout<<"successfully created file" ;
+
     }*/
 
     if ((fp=fopen("regression.txt","r"))==NULL)
     {
         cout<<"Can't open the file";
+        cout<<endl;
         exit(1);
     }
     int c=0;
+    cout<<endl;
+    gotoxy(20,18);
     cout<<"The dataset of the provided file is  : " <<endl ;
-
+    gotoxy(20,19);
+    cout<<"__________________________________________";
+    cout<<endl;
+    gotoxy(20,20);
+    cout<<"------------------------------------------";
+    cout<<endl;
+    // function for showing text file
     ShowData(fp);
    /* while(fscanf(fp,"%[^\n]\n"str)!=EOF)
     {
@@ -286,3 +385,4 @@ void reg_input()
     //split_data(fp);
 
 }
+
