@@ -9,6 +9,14 @@
 using namespace std;
 
 COORD coord= {0,0}; // this is global variable
+COORD co={0};
+
+void gotox(int x)
+{
+    coord.X=x;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),co);
+}
+
 void gotoxy(int x,int y)
 {
     coord.X=x;
@@ -18,7 +26,7 @@ void gotoxy(int x,int y)
 
      double alpha=0.0;
      double beta=0.0;
-
+     //for 2nd
      double alpha2=0.0;
      double beta2=0.0;
 
@@ -71,7 +79,7 @@ void custom_test(const vector<string>&variable,int button)
             cout<<"The approx : "<<round_final_pred2+1;
             cout<<endl;
         }
-
+      // rounding
 
     }
 }
@@ -87,6 +95,7 @@ void correlation_coeeficient_interpretation(double r,const vector<string>&variab
     else if(r>0)
     {
         cout<<"Trend of the fitted line is upward."<<endl;
+        cout<<variable[1]<<" will be increasing with the increment of " <<variable[0]<<endl;
         if(r>0.5)
             {
             cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
@@ -105,6 +114,8 @@ void correlation_coeeficient_interpretation(double r,const vector<string>&variab
     else if(r<0)
     {
         cout<<"trend of the fitted line is downward ."<<endl;
+        cout<<variable[1]<<" will be decreasing with the decrement of " <<variable[0]<<endl;
+
          if(abs(r)>0.5)
             {
                 cout<<"There is a strong positive linear association between "<<variable[0]<<" and "<<variable[1]<<endl;
@@ -139,14 +150,14 @@ void power_determine_interpretation(double power_determine,const vector<string>&
 
   if(button==1)
     {
-        cout<<100*power_determine<<"% of "<<variable[1]<<" can be explained by "<<variable[0]<<endl;
-        cout<<"Approx : "<<approax<<"%"<<endl;
+        cout<<"  "<< 100*power_determine<<"% of "<<variable[1]<<" can be explained by "<<variable[0]<<endl;
+        cout<<"  Approx : "<<approax<<"%"<<endl;
     }
 
     else if(button==2)
     {
-        cout<<100*power_determine<<"% of "<<variable[0]<<" can be explained by "<<variable[1]<<endl;
-        cout<<"Approx : "<<approax<<"%"<<endl;
+        cout<<"  "<<100*power_determine<<"% of "<<variable[0]<<" can be explained by "<<variable[1]<<endl;
+        cout<<"   Approx : "<<approax<<"%"<<endl;
     }
 }
 
@@ -157,12 +168,17 @@ void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum
     r=(sum_xy-((sum_x*sum_y)/n))/sqrt((sum_x_square-(pow(sum_x,2)/n))*(sum_y_square-((pow(sum_y,2))/n)) );
 
      power_determine=pow(r,2);
-    cout<<"\nThe correlation coefficient is: "<<r<<endl;
-    cout<<"\nInterpretation by correlation coefficient is :"<<endl;
+     //gotox(20);
+    cout<<"\n      The correlation coefficient is: "<<r<<endl;
+    cout<<"      ---------------------------------\n";
+    cout<<endl;
+    cout<<"\n********Interpretation by correlation coefficient is :********"<<endl;
+
     correlation_coeeficient_interpretation(r,variable);
 
     cout<<"\nPower of determination is :" << power_determine<<endl;
-    cout<<"\nInterpretation by power of determination is :"<<endl;
+    cout<<"\n  Interpretation by power of determination is :"<<endl;
+    cout<<"  ---------------------------------------------"<<endl;
     power_determine_interpretation(power_determine,variable,button);
 
     //giving specific value
@@ -173,9 +189,14 @@ void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum
 void regression_line(double alpha,double beta)
 {
     cout<<endl;
-    cout<<"\nThe best fitted line is :"<<endl;
-    cout<<"y = "<<alpha<<" "<<"+"<<" "<<beta<<"x"<<endl;
-    cout<<endl;
+    //gotoxy(20,45);
+    cout<<"                 -----------------------------------------"<<endl;
+    cout<<"                 | The best fitted line is :             |"<<endl;
+    //gotoxy(20,47);
+    cout<<"                 |                                       |"<<endl;
+    cout<<"                 | y = "<<alpha<<" "<<"+"<<" "<<beta<<"x"<<"               |"<<endl;
+    cout<<"                 -----------------------------------------"<<endl;
+
 }
 
 void calculation(const vector<double>&x , const vector<double>&y,const vector<string>&variable,int button)
@@ -306,22 +327,19 @@ void ShowData(FILE *fp)
         cout<<"-";
     }
     cout<<endl;
-
-    cout<<"\nThe variables are : "<<endl;
+    k=k+2;
+    gotoxy(20,k);
+    cout<<"The variables are : "<<endl;
+     gotoxy(20,k+1);
+    cout<<"--------------------"<<endl;;
     for(int i=0;i<variable.size();i++)
     {
+        gotoxy(20,k+2);
         cout<<i+1<<".";
+        k=k+2;
         cout<<variable[i]<<endl;
     }
     cout<<endl;
-
-    cout<<"**********Which variable you want to make independent variable : ********"<<endl;
-     for(int i=0;i<variable.size();i++)
-    {
-        cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
-    }
-    int button;
-    cin>>button;
 
 
     for(int i=0;i<s.size();i=i+2)
@@ -339,6 +357,20 @@ void ShowData(FILE *fp)
         y.push_back(m);
         //cout<<n<<endl;
     }
+    int sample_size;
+    sample_size=x.size();
+    cout<<endl;
+    cout<<"        The sample size is : "<< sample_size <<endl;
+    cout<<endl;
+    cout<<"\n**********Which variable you want to make independent variable : ********"<<endl;
+    cout<<"___________________________________________________________________________"<<endl;
+     for(int i=0;i<variable.size();i++)
+    {
+        cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
+    }
+    int button;
+    cin>>button;
+
 
     calculation(x,y,variable,button);
     /*for(int i=0;i<x.size();i++)
