@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-#include"regression.h""
+#include"regression.h"
+#include"polynomial_reg.h"
 using namespace std;
 int main()
 {
@@ -25,5 +26,6 @@ int main()
     if(button ==1)
     {
         reg_input();
+        poly_reg();
     }
 }

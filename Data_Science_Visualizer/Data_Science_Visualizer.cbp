@@ -32,8 +32,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Polynomial_reg.cpp" />
 		<Unit filename="Regression.cpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="polynomial_reg.h" />
 		<Unit filename="regression.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -372,6 +372,8 @@ void ShowData(FILE *fp)
     cin>>button;
 
 
+    fclose(fp);
+
     calculation(x,y,variable,button);
     /*for(int i=0;i<x.size();i++)
         cout<<x[i]<<" ";
