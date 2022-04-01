@@ -52,7 +52,7 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
  }
 
  //Printing the Table for x
- for (i = 1; i <= 2 * degree; i++)
+ /*for (i = 1; i <= 2 * degree; i++)
  {
   cout << "--------";
  }
@@ -112,7 +112,7 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
  {
   cout << "_________";
  }
-
+*/
  for (j = 0; j <= 2 * degree; j++)
  {
   a[j] = 0;
@@ -147,7 +147,7 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
  }
 
  //Printing the equations in Matrix form
- cout << "\n\nThe Equations in Matrix form are :\n";
+ /*cout << "\n\nThe Equations in Matrix form are :\n";
  for (i = 0; i < degree+ 1; i++)
  {
   //cout <<endl;
@@ -157,7 +157,7 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
    cout << setw(10)<<c[i][j] << "\t"<<setw(10);
   }
   cout<<endl;
- }
+ }*/
 
  //Gauss Elimination methods
  for (k = 0; k < degree; k++)
@@ -171,9 +171,9 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
   }
  }
 
- //Matrix After Forward Elimination
+
  cout<<endl;
- cout << "\n\nNew matrix is :";
+/* cout << "\n\nNew matrix is :";
  for (i = 0; i < degree+ 1; i++)
  {
   cout << endl;
@@ -182,7 +182,7 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
   {
    cout << c[i][j] << "\t\t";
   }
- }
+ }*/
 
  //Steps of Back Substitution
  for (k = degree; k >= 0; k--)
@@ -190,7 +190,7 @@ void calculate_poly_reg(const vector<double>&x1 , const vector<double>&y1)
   matrix=0;
   for (j = degree; j > k; j--)
   {
- matrix+= c[k][j] * d[j];
+     matrix+= c[k][j] * d[j];
   }
   d[k] = (c[k][degree + 1] - matrix) / c[k][k];
  }

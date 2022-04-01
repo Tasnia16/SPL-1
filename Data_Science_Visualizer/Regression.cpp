@@ -168,7 +168,7 @@ void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum
     r=(sum_xy-((sum_x*sum_y)/n))/sqrt((sum_x_square-(pow(sum_x,2)/n))*(sum_y_square-((pow(sum_y,2))/n)) );
 
      power_determine=pow(r,2);
-     //gotox(20);
+     gotox(20);
     cout<<"\n      The correlation coefficient is: "<<r<<endl;
     cout<<"      ---------------------------------\n";
     cout<<endl;
@@ -189,10 +189,10 @@ void correlation_coeeficient(double sum_x, double sum_y,double sum_xy,double sum
 void regression_line(double alpha,double beta)
 {
     cout<<endl;
-    //gotoxy(20,45);
+    gotoxy(20,45);
     cout<<"                 -----------------------------------------"<<endl;
     cout<<"                 | The best fitted line is :             |"<<endl;
-    //gotoxy(20,47);
+    gotoxy(20,47);
     cout<<"                 |                                       |"<<endl;
     cout<<"                 | y = "<<alpha<<" "<<"+"<<" "<<beta<<"x"<<"               |"<<endl;
     cout<<"                 -----------------------------------------"<<endl;
@@ -279,19 +279,22 @@ void ShowData(FILE *fp)
     vector<double>y;
     char str[1000];
     int line=0;
-    int k=21;
+    long long int k=21;
      while(fscanf(fp,"%[^\n]\n",str)!=EOF)
     {
         //cout<<"____________________________________\n";
         //cout<<"|"<<str<<setw(20)<<"|"<<s<<setw(5)<<endl;
+
         gotoxy(20,k);
         cout<<"|"<<endl;
         gotoxy(30,k);
         cout<<str<<endl;
         line++;
+
         gotoxy(60,k);
         cout<<"|"<<endl;
          k=k+1;
+
         if(line==1)
 
         {
@@ -318,10 +321,12 @@ void ShowData(FILE *fp)
             }
         }
     }
+
     gotoxy(20,k);
     cout<<"|";
 
-    for(int t=20;t<=60;t++)
+
+    for(long long int t=20;t<=60;t++)
     {
         gotoxy(t,k);
         cout<<"-";
@@ -329,10 +334,12 @@ void ShowData(FILE *fp)
     cout<<endl;
     k=k+2;
     gotoxy(20,k);
+
+
     cout<<"The variables are : "<<endl;
      gotoxy(20,k+1);
     cout<<"--------------------"<<endl;;
-    for(int i=0;i<variable.size();i++)
+    for(long long int i=0;i<variable.size();i++)
     {
         gotoxy(20,k+2);
         cout<<i+1<<".";
@@ -342,7 +349,7 @@ void ShowData(FILE *fp)
     cout<<endl;
 
 
-    for(int i=0;i<s.size();i=i+2)
+    for(long long int i=0;i<s.size();i=i+2)
     {
         double n;
         n=std:: stof(s[i]);
@@ -350,7 +357,7 @@ void ShowData(FILE *fp)
         //cout<<n<<endl;
     }
 
-     for(int j=1;j<s.size();j=j+2)
+     for(long long int j=1;j<s.size();j=j+2)
     {
         double m;
         m=std:: stof(s[j]);
@@ -364,7 +371,7 @@ void ShowData(FILE *fp)
     cout<<endl;
     cout<<"\n**********Which variable you want to make independent variable : ********"<<endl;
     cout<<"___________________________________________________________________________"<<endl;
-     for(int i=0;i<variable.size();i++)
+     for(long long int i=0;i<variable.size();i++)
     {
         cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
     }
