@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include"regression.h"
 #include"polynomial_reg.h"
+#include"logictic_reg.h"
 using namespace std;
 int main()
 {
@@ -32,7 +33,11 @@ int main()
         cout<<"Press 0 to exit program:"<<endl;
         int press2;
         cin>>press2;
-        if(press2==0)
+        if (press2==1)
+        {
+          logistic_regression();
+        }
+        else if(press2==0)
             exit(0);
     }
 
