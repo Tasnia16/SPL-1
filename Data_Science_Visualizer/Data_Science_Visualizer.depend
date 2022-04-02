@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1647679028 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\main.cpp
+1648876787 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\main.cpp
 	<bits/stdc++.h>
 	"regression.h"
 	"polynomial_reg.h"
@@ -8,7 +8,7 @@
 
 1644734195 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\plz.h
 
-1648366436 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.cpp
+1648842377 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.cpp
 	<bits/stdc++.h>
 	<stdlib.h>
 	<vector>

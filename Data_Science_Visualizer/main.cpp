@@ -27,5 +27,7 @@ int main()
     {
         reg_input();
         poly_reg();
+        cout<<"Do you want to test any dataset containing binary output?"<<endl;
     }
+
 }
