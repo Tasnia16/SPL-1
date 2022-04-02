@@ -28,6 +28,12 @@ int main()
         reg_input();
         poly_reg();
         cout<<"Do you want to test any dataset containing binary output?"<<endl;
+        cout<<"Press 1 to continue :"<<endl;
+        cout<<"Press 0 to exit program:"<<endl;
+        int press2;
+        cin>>press2;
+        if(press2==0)
+            exit(0);
     }
 
 }
