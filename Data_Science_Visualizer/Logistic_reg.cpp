@@ -34,8 +34,8 @@ void logistic_regression()
                 count++;
             }
     }
-   /* for(int i=0;i<count;i++)
-        cout<<s1[i]<<endl;*/
+    for(int i=0;i<count;i++)
+        cout<<s1[i]<<endl;
 
     for (long long int i=0;i<count;i++)
     {
@@ -61,6 +61,20 @@ void logistic_regression()
 
    // cout<<s2[0]<<" "<<s2[1]<<endl;
 
+    for (long long int i=0;i<count;i++)
+    {
+        if(s1[i]==s2[0])
+            binary.push_back(1);
+
+
+        else
+            binary.push_back(0);
+    }
+
+     for (long long int i=0;i<count;i++)
+    {
+        cout<<binary[i]<<" ";
+    }
 
 
 
