@@ -9,9 +9,9 @@ set<string>set1;
 
 void logistic_regression()
 {
-   FILE *fp;
+   FILE *fp_y;
 
-   if ((fp=fopen("y_variable.txt","r"))==NULL)
+   if ((fp_y=fopen("y_variable.txt","r"))==NULL)
     {
         cout<<"Can't open the file";
         cout<<endl;
@@ -22,7 +22,7 @@ void logistic_regression()
     int count=0;
 
     char split[1000];
-    while(fscanf(fp,"%[^\n]\n",split)!=EOF)
+    while(fscanf(fp_y,"%[^\n]\n",split)!=EOF)
     {
         stringstream data(split);
         string y_var;
@@ -71,11 +71,16 @@ void logistic_regression()
             binary.push_back(0);
     }
 
-     for (long long int i=0;i<count;i++)
+    /* for (long long int i=0;i<count;i++)
     {
         cout<<binary[i]<<" ";
-    }
+    }*/
 
+    fclose(fp_y);
+
+
+
+    FILE *fp_x;
 
 
 
