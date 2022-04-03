@@ -3,6 +3,7 @@
 using namespace std;
 
 vector<string>s1;
+vector<string>s2;
 vector<int>binary;
 set<string>set1;
 
@@ -50,6 +51,15 @@ void logistic_regression()
         binary[i]=0;
 
     }*/
+
+    set<string>:: iterator itr;
+
+    for(itr=set1.begin();itr!=set1.end();itr++)
+    {
+        s2.push_back(*itr);
+    }
+
+   // cout<<s2[0]<<" "<<s2[1]<<endl;
 
 
 
