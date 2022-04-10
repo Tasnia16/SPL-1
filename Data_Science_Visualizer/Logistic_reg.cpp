@@ -2,13 +2,51 @@
 #include"logictic_reg.h"
 using namespace std;
 
+
+double pred();
+void Test();
+
 vector<string>s1_y;
 vector<string>s2_y;
 vector<string>s1_x;
 vector<double>x_train;
 vector<int>binary;
 set<string>set1;
+
 const double Threshold = 0.001;
+const int max_iteration=500;
+double cost=0;
+
+double pred()
+{
+
+}
+
+void Test()
+{
+
+}
+
+
+ void initialize_weight(double *weight,int factor)
+ {
+
+     for(int i=0;i<factor;i++)
+     {
+         weight[i]=0.01;
+     }
+ }
+
+
+ double sigmoid(double z)
+ {
+     double y;
+     y=1/(1+exp(-z));
+
+     return y;
+ }
+
+
 
 void logistic_regression()
 {
@@ -126,6 +164,26 @@ void logistic_regression()
         cout<<x_train[i]<<endl;
     }*/
 
+   double weight[factor];
+   double bias;
+
+   initialize_weight(weight,factor);
+
+   for(int i=0;i<max_iteration;i++)
+   {
+      cost=pred();
+
+      if(i%10==0)
+      {
+          cout<<"Cost and iteration : "<<cost<<" "<<i<<endl;
+      }
+
+      Test();
+   }
+
+
 
 }
+
+
 
