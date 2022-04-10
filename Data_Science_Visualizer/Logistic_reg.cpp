@@ -25,17 +25,69 @@ double bias;
 
 double pred()
 {
-
+  double z;
 }
 
-void Test()
-{
+double sigmoid(double z)
+ {
+     double y;
+     y=1/(1+exp(-z));
 
+     return y;
+ }
+
+ void matrix_multiplication(int test_count, int factor,const vector<double>&x,double *weight, double bias)
+{
+    for(int i=0;i<test_count;i++)
+    {
+        weight[i]=0.0;
+
+
+    }
+}
+void Test(const vector<double>&x,const vector<double>&y,double *weight, double bias,int test_count,int factor)
+{
+   double a[test_count];
+   double result_y[test_count];
+   double accuracy=0;
+
+   matrix_multiplication(test_count,factor,x,weight,bias);
+
+   for(int i=0;i<test_count;i++)
+   {
+       result_y[i]=sigmoid(a[i]);
+
+       if(result_y[i]<0.5)
+       {
+           result_y[i]=0;
+       }
+
+       else
+       {
+           result_y[i]=1;
+       }
+       accuracy=accuracy+fabs(result_y[i]-y[i]);
+   }
+
+   accuracy=100-(accuracy/test_count);
+   cout<<"Test accuracy is : "<<accuracy*100<<"%"<<endl;
 }
 
-void loss()
+double loss(double expected_result, double actual_result)
 {
+   double main_result=0;
 
+   if(expected_result==0)
+   {
+       main_result=-log(1-actual_result);
+   }
+
+   else if(expected_result==1)
+   {
+       main_result=-log(actual_result);
+   }
+
+   return main_result;
 }
 
 
@@ -46,15 +98,6 @@ void loss()
      {
          weight[i]=0.01;
      }
- }
-
-
- double sigmoid(double z)
- {
-     double y;
-     y=1/(1+exp(-z));
-
-     return y;
  }
 
 
@@ -188,10 +231,11 @@ void logistic_regression()
 
     char split_x_test[1000];
     int count_x_test=0;
+    int line2=0;
 
     while(fscanf(fp_x_test,"%[^\n]\n",split_x_test)!=EOF)
     {
-        //line++;
+        line2++;
         stringstream data2(split_x_test);
         string x_var_test;
 
@@ -200,10 +244,13 @@ void logistic_regression()
                 double n;
                  n=std:: stof(x_var_test);
                  x_test.push_back(n);
+                 count_x_test++;
 
             }
     }
 
+    int row_count_x=count_x_test/factor;
+    //cout<<"tttttttttttt"<<row_count_x<<endl;
 
     fclose(fp_x_test);
 
@@ -258,7 +305,6 @@ void logistic_regression()
 
 
 
-
    double weight[factor];
 
 
@@ -275,7 +321,7 @@ void logistic_regression()
 
    }
 
-      Test();
+      //Test(x_test,y_test,weight,bias,row_count_x, factor);
 
 }
 
