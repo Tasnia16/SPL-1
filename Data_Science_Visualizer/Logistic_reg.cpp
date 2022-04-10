@@ -9,13 +9,16 @@ void Test();
 vector<string>s1_y;
 vector<string>s2_y;
 vector<string>s1_x;
+vector<double>x_test;
+vector<double>y_test;
 vector<double>x_train;
-vector<int>binary;
+vector<double>binary;
 set<string>set1;
 
 const double Threshold = 0.001;
 const int max_iteration=500;
 double cost=0;
+double bias;
 
 double pred()
 {
@@ -164,8 +167,21 @@ void logistic_regression()
         cout<<x_train[i]<<endl;
     }*/
 
+
+    fclose(fp_x);
+    FILE *fp_x_test;
+
+     if ((fp_x_test=fopen("x_for_test.txt","r"))==NULL)
+    {
+        cout<<"Can't open the file";
+        cout<<endl;
+        exit(1);
+    }
+
+
+
    double weight[factor];
-   double bias;
+
 
    initialize_weight(weight,factor);
 
@@ -178,10 +194,9 @@ void logistic_regression()
           cout<<"Cost and iteration : "<<cost<<" "<<i<<endl;
       }
 
-      Test();
    }
 
-
+      Test();
 
 }
 
