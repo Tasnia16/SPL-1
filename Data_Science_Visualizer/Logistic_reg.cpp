@@ -11,9 +11,12 @@ vector<string>s2_y;
 vector<string>s1_x;
 vector<double>x_test;
 vector<double>y_test;
+vector<string>y_test_s3;
+vector<string>y_test_s4;
 vector<double>x_train;
 vector<double>binary;
 set<string>set1;
+set<string>set2;
 
 const double Threshold = 0.001;
 const int max_iteration=500;
@@ -26,6 +29,11 @@ double pred()
 }
 
 void Test()
+{
+
+}
+
+void loss()
 {
 
 }
@@ -81,7 +89,7 @@ void logistic_regression()
     for(int i=0;i<count;i++)
         cout<<s1_y[i]<<endl;
 
-    for (long long int i=0;i<count;i++)
+    for ( int i=0;i<count;i++)
     {
         set1.insert(s1_y[i]);
     }
@@ -105,7 +113,7 @@ void logistic_regression()
 
    // cout<<s2[0]<<" "<<s2[1]<<endl;
 
-    for (long long int i=0;i<count;i++)
+    for (int i=0;i<count;i++)
     {
         if(s1_y[i]==s2_y[0])
             binary.push_back(1);
@@ -177,6 +185,77 @@ void logistic_regression()
         cout<<endl;
         exit(1);
     }
+
+    char split_x_test[1000];
+    int count_x_test=0;
+
+    while(fscanf(fp_x_test,"%[^\n]\n",split_x_test)!=EOF)
+    {
+        //line++;
+        stringstream data2(split_x_test);
+        string x_var_test;
+
+        while(data2>>x_var_test)
+            {
+                double n;
+                 n=std:: stof(x_var_test);
+                 x_test.push_back(n);
+
+            }
+    }
+
+
+    fclose(fp_x_test);
+
+
+    FILE *fp_y_test;
+    if ((fp_y_test=fopen("y_for_test.txt","r"))==NULL)
+    {
+        cout<<"Can't open the file";
+        cout<<endl;
+        exit(1);
+    }
+
+
+    char split_y_test[1000];
+    int count_y_test=0;
+    while(fscanf(fp_y_test,"%[^\n]\n",split_y_test)!=EOF)
+    {
+        stringstream data(split_y_test);
+        string y_var;
+
+        while(data>>y_var)
+            {
+                 //cout<<y_var;
+                y_test_s3.push_back(y_var);
+                count_y_test++;
+            }
+    }
+
+     for ( int i=0;i<count_y_test;i++)
+    {
+        set2.insert(y_test_s3[i]);
+    }
+
+    set<string>:: iterator itr2;
+
+    for(itr2=set2.begin();itr2!=set2.end();itr2++)
+    {
+        y_test_s4.push_back(*itr2);
+    }
+
+
+
+    for (int i=0;i<count_y_test;i++)
+    {
+        if(y_test_s3[i]==y_test_s4[0])
+            y_test.push_back(1);
+
+
+        else
+            y_test.push_back(0);
+    }
+
 
 
 

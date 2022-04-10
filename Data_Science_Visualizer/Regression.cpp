@@ -369,12 +369,12 @@ void ShowData(FILE *fp)
     cout<<endl;
     cout<<"        The sample size is : "<< sample_size <<endl;
     cout<<endl;
-    cout<<"\n**********Which variable you want to make independent variable : ********"<<endl;
+    /*cout<<"\n**********Which variable you want to make independent variable : ********"<<endl;
     cout<<"___________________________________________________________________________"<<endl;
      for(long long int i=0;i<variable.size();i++)
     {
         cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
-    }
+    }*/
     int button;
     cin>>button;
 
