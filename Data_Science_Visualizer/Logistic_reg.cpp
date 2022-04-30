@@ -14,7 +14,7 @@ vector<double>y_test;
 vector<string>y_test_s3;
 vector<string>y_test_s4;
 vector<double>x_train;
-vector<double>binary;
+vector<double>y_train;
 set<string>set1;
 set<string>set2;
 
@@ -73,6 +73,7 @@ void Test(const vector<double>&x,const vector<double>&y,double *weight, double b
    cout<<"Test accuracy is : "<<accuracy*100<<"%"<<endl;
 }
 
+
 double loss(double expected_result, double actual_result)
 {
    double main_result=0;
@@ -89,6 +90,7 @@ double loss(double expected_result, double actual_result)
 
    return main_result;
 }
+
 
 
  void initialize_weight(double *weight,int factor)
@@ -132,6 +134,7 @@ void logistic_regression()
     for(int i=0;i<count;i++)
         cout<<s1_y[i]<<endl;
 
+        cout<<"end";
     for ( int i=0;i<count;i++)
     {
         set1.insert(s1_y[i]);
@@ -151,6 +154,7 @@ void logistic_regression()
 
     for(itr=set1.begin();itr!=set1.end();itr++)
     {
+        //cout<<*itr<<" ";
         s2_y.push_back(*itr);
     }
 
@@ -159,11 +163,11 @@ void logistic_regression()
     for (int i=0;i<count;i++)
     {
         if(s1_y[i]==s2_y[0])
-            binary.push_back(1);
+            y_train.push_back(1);
 
 
         else
-            binary.push_back(0);
+            y_train.push_back(0);
     }
 
     /* for (long long int i=0;i<count;i++)
@@ -308,6 +312,23 @@ void logistic_regression()
    double weight[factor];
 
 
+   /*for(int i=0;i<x_train.size();i++)
+    cout<<x_train[i]<<endl;
+   cout<<"start\n";
+
+   for(int i=0;i<x_test.size();i++)
+    cout<<x_test[i]<<endl;
+   cout<<"start\n";
+
+   for(int i=0;i<y_train.size();i++)
+    cout<<y_train[i]<<endl;
+   cout<<"start\n";
+
+   for(int i=0;i<y_test.size();i++)
+    cout<<y_test[i]<<endl;
+   cout<<"start\n";*/
+
+
    initialize_weight(weight,factor);
 
    for(int i=0;i<max_iteration;i++)
@@ -316,7 +337,7 @@ void logistic_regression()
 
       if(i%10==0)
       {
-          cout<<"Cost and iteration : "<<cost<<" "<<i<<endl;
+          //cout<<"Cost and iteration : "<<cost<<" "<<i<<endl;
       }
 
    }
