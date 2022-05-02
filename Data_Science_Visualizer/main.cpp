@@ -2,6 +2,7 @@
 #include"regression.h"
 #include"polynomial_reg.h"
 #include"logictic_reg.h"
+#include "GroupData_Classification.h"
 using namespace std;
 int main()
 {
@@ -37,8 +38,14 @@ int main()
         {
           logistic_regression();
         }
+
         else if(press2==0)
             exit(0);
+    }
+
+    if(button==2)
+    {
+        classification();
     }
 
 }

@@ -20,13 +20,9 @@ set<string>set2;
 
 const double Threshold = 0.001;
 const int max_iteration=500;
+const double LRate=0.01;
 double cost=0;
 double bias;
-
-double pred()
-{
-  double z;
-}
 
 double sigmoid(double z)
  {
@@ -36,45 +32,7 @@ double sigmoid(double z)
      return y;
  }
 
- void matrix_multiplication(int test_count, int factor,const vector<double>&x,double *weight, double bias)
-{
-    for(int i=0;i<test_count;i++)
-    {
-        weight[i]=0.0;
-
-
-    }
-}
-void Test(const vector<double>&x,const vector<double>&y,double *weight, double bias,int test_count,int factor)
-{
-   double a[test_count];
-   double result_y[test_count];
-   double accuracy=0;
-
-   matrix_multiplication(test_count,factor,x,weight,bias);
-
-   for(int i=0;i<test_count;i++)
-   {
-       result_y[i]=sigmoid(a[i]);
-
-       if(result_y[i]<0.5)
-       {
-           result_y[i]=0;
-       }
-
-       else
-       {
-           result_y[i]=1;
-       }
-       accuracy=accuracy+fabs(result_y[i]-y[i]);
-   }
-
-   accuracy=100-(accuracy/test_count);
-   cout<<"Test accuracy is : "<<accuracy*100<<"%"<<endl;
-}
-
-
-double loss(double expected_result, double actual_result)
+ double loss(double expected_result, double actual_result)
 {
    double main_result=0;
 
@@ -89,6 +47,115 @@ double loss(double expected_result, double actual_result)
    }
 
    return main_result;
+}
+
+void matrix_multiplication2(int w, int h,double *x,double *weight,double*a, double bias)
+{
+    for(int i=0;i<h;i++)
+    {
+        a[i]=0.0;
+        for(int j=0;j<w;j++)
+        {
+            a[i]=a[i]+weight[j]*x[(i*w)+j]+bias;
+        }
+    }
+}
+
+void matrix_multiplication(int w, int h,const vector<double>&x,double *weight,double*a, double bias)
+{
+    for(int i=0;i<h;i++)
+    {
+        a[i]=0.0;
+        for(int j=0;j<w;j++)
+        {
+            a[i]=a[i]+weight[j]*x[(i*w)+j]+bias;
+        }
+    }
+}
+
+void transpose_matrix(int w,int h,const vector<double>&x,double *trasMatrix)
+{
+    for(int i=0;i<h;i++)
+    {
+        for(int j=0;j<w;j++)
+        {
+            trasMatrix[(j*h)+i]=x[(i*w)+j];
+        }
+    }
+}
+
+
+double pred(const vector<double>&x,const vector<double>&y,double*weight, double &bias, int train_count, int factor)
+{
+  double z[train_count];
+  double result[train_count];
+  double loss_result=0.0;
+  double cost_result=0.0;
+  double exp_diff[train_count];
+  double sum_diff=0;
+  double derivative_weight[factor];
+
+  matrix_multiplication(factor,train_count,x,weight,z,bias);
+
+  for(int i=0;i<train_count;i++)
+  {
+      result[i]=sigmoid(z[i]);
+      exp_diff[i]=result[i]-y[i];
+      sum_diff+=exp_diff[i];
+      loss_result=loss(y[i],result[i]);
+      cost_result+=loss_result;
+  }
+
+  cost_result=cost_result/train_count;
+
+  double transMatrix[train_count*factor];
+  transpose_matrix(factor,train_count,x,transMatrix);
+  matrix_multiplication2(train_count,factor,transMatrix,exp_diff,derivative_weight,0);
+
+  for(int i=0;i<factor;i++)
+  {
+      weight[i]=weight[i]-LRate*derivative_weight[i];
+  }
+
+
+  bias=bias-LRate*(sum_diff/train_count);
+
+  return cost_result;
+
+}
+
+
+
+void Test(const vector<double>&x,const vector<double>&y,double *weight, double bias,int test_count,int factor)
+{
+   double a[test_count];
+   double result_y[test_count];
+   double accuracy=0;
+
+   matrix_multiplication(factor,test_count,x,weight,a,bias);
+
+   for(int i=0;i<test_count;i++)
+   {
+       result_y[i]=sigmoid(a[i]);
+
+       if(result_y[i]<0.5)
+       {
+           result_y[i]=0;
+           cout<<result_y[i]<<endl;
+       }
+
+       else
+       {
+           result_y[i]=1;
+            cout<<result_y[i]<<endl;
+       }
+       accuracy=accuracy+abs(result_y[i]-y[i]);
+   }
+
+    cout<<accuracy<<endl;
+   accuracy=100-(accuracy/test_count)*100;
+   cout<<"Test accuracy is : "<<accuracy<<"%"<<endl;
+
 }
 
 
@@ -333,16 +400,17 @@ void logistic_regression()
 
    for(int i=0;i<max_iteration;i++)
    {
-      cost=pred();
+      cost=pred(x_train,y_train,weight,bias,line,factor);
 
       if(i%10==0)
       {
-          //cout<<"Cost and iteration : "<<cost<<" "<<i<<endl;
+          cout<<"Cost and iteration : "<<cost<<" "<<i<<endl;
       }
 
    }
 
-      //Test(x_test,y_test,weight,bias,row_count_x, factor);
+      Test(x_test,y_test,weight,bias,line2, factor);
+      //cout<<line<<" "<<line2;
 
 }
 

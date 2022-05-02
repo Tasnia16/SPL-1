@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1648881513 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\main.cpp
+1651476541 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\main.cpp
 	<bits/stdc++.h>
 	"regression.h"
 	"polynomial_reg.h"
 	"logictic_reg.h"
+	"GroupData_Classification.h"
 
 1647678446 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.h
 
@@ -48,7 +49,22 @@
 
 1648881326 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\logictic_reg.h
 
-1651315348 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\logistic_reg.cpp
+1651471950 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\logistic_reg.cpp
 	<bits/stdc++.h>
 	"logictic_reg.h"
+
+1651476541 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\groupdata_classification.h
+
+1651479883 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\classify_groupdata.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"GroupData_Classification.h"
+	"hypothesis_test.h"
+
+1651479886 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\hypothesis_test.h
+
+1651482107 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\testing_hypothesis.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"hypothesis_test.h"
 
