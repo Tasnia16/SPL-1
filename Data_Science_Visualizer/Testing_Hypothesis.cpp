@@ -3,8 +3,34 @@
 #include"hypothesis_test.h"
 using namespace std;
 
-void pair_t_test()
+void  t_z_test(const vector<double>&a, const vector<double>&b)
 {
+
+}
+
+void pair_t_test(const vector<double>&a, const vector<double>&b)
+{
+    double w=0,mean,TS,n,Sw,ss=0,test, DF;
+    n=a.size();
+
+    DF=n-1;
+
+    for(int i=0;i<n;i++)
+    {
+        ss+=pow((a[i]-b[i]),2);
+        w+=(a[i]-b[i]);
+    }
+    //cout<<w;
+    mean=w/n;
+    Sw=sqrt((ss-n*mean*mean)/(n-1));
+   // cout<<Sw;
+
+   test=(sqrt(n)*mean)/Sw;
+
+   TS=fabs(test);
+
+   cout<<TS;
+
 
 }
 
@@ -107,8 +133,13 @@ void start_hypothesis_test()
 
     if(var[0]=="before" && var[1]=="after")
     {
-        pair_t_test();
+        pair_t_test(grp1,grp2);
     }
+
+    else
+     {
+        t_z_test(grp1,grp2);
+     }
 
 
 }
