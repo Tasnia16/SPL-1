@@ -9,6 +9,8 @@ int cnt;
 double arr[100];
 }grp[100];
 
+int maximum=0;
+
 void start_anova_test()
 {
 
@@ -81,12 +83,22 @@ for(int i=0;i<line;i++)
 }
 
 cout<<endl;
-for(int i=0;i<5;i++)
+
+for(int i=0;i<line;i++)
+{
+    if((grp[i].cnt-1)>maximum)
+        maximum=grp[i].cnt-1;
+}
+ //cout<<maximum<<endl;
+
+for(int i=0;i<maximum;i++)
 
   {
       for(int k=0;k<line;k++)
       {
+
           cout<<grp[k].arr[i]<<setw(20);
+
       }
 
       cout<<endl;
