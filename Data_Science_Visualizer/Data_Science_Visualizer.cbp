@@ -32,12 +32,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ANOVA_test.cpp" />
 		<Unit filename="Classify_GroupData.cpp" />
 		<Unit filename="GroupData_Classification.h" />
 		<Unit filename="Logistic_reg.cpp" />
 		<Unit filename="Polynomial_reg.cpp" />
 		<Unit filename="Regression.cpp" />
 		<Unit filename="Testing_Hypothesis.cpp" />
+		<Unit filename="anova_test.h" />
 		<Unit filename="hypothesis_test.h" />
 		<Unit filename="logictic_reg.h" />
 		<Unit filename="main.cpp" />
