@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #include"regression.h"
-#include"polynomial_reg.h"
 #include"logictic_reg.h"
 #include "GroupData_Classification.h"
 using namespace std;
@@ -28,7 +27,6 @@ int main()
     if(button ==1)
     {
         reg_input();
-        poly_reg();
         cout<<"Do you want to test any dataset containing binary output?"<<endl;
         cout<<"Press 1 to continue :"<<endl;
         cout<<"Press 0 to exit program:"<<endl;

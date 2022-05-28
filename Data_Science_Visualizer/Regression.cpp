@@ -6,6 +6,7 @@
 #include<cstring>
 #include<windows.h>
 #include"regression.h"
+#include"polynomial_reg.h"
 using namespace std;
 
 COORD coord= {0,0}; // this is global variable
@@ -44,7 +45,7 @@ void custom_test(const vector<string>&variable,int button)
         int round_final_pred;
         round_final_pred=final_pred;
         double fp=round_final_pred;
-        //cout<<fp<<endl;
+
         if(fp==final_pred)
         {
             cout<<"The approx : "<<round_final_pred;
@@ -82,6 +83,8 @@ void custom_test(const vector<string>&variable,int button)
       // rounding
 
     }
+
+    poly_reg();
 }
 
 void correlation_coeeficient_interpretation(double r,const vector<string>&variable)
@@ -251,12 +254,8 @@ void calculation(const vector<double>&x , const vector<double>&y,const vector<st
      {
          sum_xy=sum_xy+xy[i].first*xy[i].second;
      }
-     //cout<<sum_xy;
-
      beta=(sum_xy-(n*mean_x*mean_y))/(sum_x_square-n*pow(mean_x,2));
-     //cout<<beta;
      alpha=mean_y-(beta*mean_x);
-     //cout<<alpha;
 
      beta2=(sum_xy-(n*mean_x*mean_y))/(sum_y_square-n*pow(mean_y,2));
      alpha2=mean_x-(beta2*mean_y);
@@ -271,6 +270,16 @@ void calculation(const vector<double>&x , const vector<double>&y,const vector<st
 
 }
 
+bool IS_NUM(const string& str)
+{
+    for (char const &c : str)
+        {
+          if (std::isdigit(c) == 0)
+           return false;
+        }
+    return true;
+}
+
 void ShowData(FILE *fp)
 {
     vector<string>s;
@@ -282,6 +291,23 @@ void ShowData(FILE *fp)
     long long int k=21;
      while(fscanf(fp,"%[^\n]\n",str)!=EOF)
     {
+
+        stringstream DATA(str);
+
+            string VAR;
+
+            while(DATA>>VAR)
+            {
+                int BOOL;
+                      BOOL=IS_NUM(VAR);
+                      if(BOOL==1)
+                      {
+                          k_means(fp);
+                          fclose(fp);
+                          return;
+                      }
+            }
+
         //cout<<"____________________________________\n";
         //cout<<"|"<<str<<setw(20)<<"|"<<s<<setw(5)<<endl;
 
@@ -293,6 +319,7 @@ void ShowData(FILE *fp)
 
        /* gotoxy(60,k);
         cout<<"|"<<endl;*/
+
          k=k+1;
 
         if(line==1)
@@ -382,24 +409,12 @@ void ShowData(FILE *fp)
     fclose(fp);
 
     calculation(x,y,variable,button);
-    /*for(int i=0;i<x.size();i++)
-        cout<<x[i]<<" ";
-
-        for(int i=0;i<y.size();i++)
-        cout<<y[i]<<" ";*/
 
 }
 
 void reg_input()
 {
     FILE *fp;
-    //string str;
-    /*fp=fopen("regression.txt","w");
-    if(fp!=NULL)
-
-    {
-
-    }*/
 
     if ((fp=fopen("regression.txt","r"))==NULL)
     {
@@ -419,11 +434,6 @@ void reg_input()
     cout<<endl;
     // function for showing text file
     ShowData(fp);
-   /* while(fscanf(fp,"%[^\n]\n"str)!=EOF)
-    {
-
-    }*/
-    //split_data(fp);
 
 }
 

@@ -3,6 +3,128 @@
 #include"hypothesis_test.h"
 using namespace std;
 
+void interpretation(double TS,double tabulated_value)
+ {
+     if(TS>tabulated_value)
+     {
+         cout<<"There is significant difference before and after experiment"<<endl;
+     }
+
+     else
+         cout<<"There is no significant difference before and after experiment"<<endl;
+ }
+
+ void z_table(double alpha, double TS)
+ {
+     fstream newfile1;
+  newfile1.open("z_table.txt",ios::in);
+  int line=0;
+  alpha=1-alpha;
+  double tabulated_value;
+  cout<<"Significance is :"<<alpha<<endl;
+  if(newfile1.is_open())
+  {
+      string str;
+      int i=0;
+      while(getline(newfile1,str))
+      {
+            line++;
+            stringstream data(str);
+
+            string reg;
+            double store[100];
+            int x=0;
+            int a=0;
+            double temp;
+            int flag=0;
+            while(data>>reg)
+                {
+                      a++;
+                      if(line==1)
+                      {
+                          double nn=std:: stod(reg);
+                          store[x]=nn;
+                          x++;
+                      }
+
+
+                  else
+                  {
+                      double nn=std:: stod(reg);
+                      if(a==1)
+                          {
+                              temp=nn;
+                          }
+
+                          else
+                            {
+
+                                if(nn==alpha)
+                                 {
+                                   tabulated_value=temp+store[a-2];
+                                   flag=1;
+                                   break;
+                                 }
+                             }
+                  }
+                }
+
+            if(flag==1)
+                    break;
+
+      }
+
+}
+
+newfile1.close();
+
+cout<<"\n"<<tabulated_value;
+
+interpretation(TS,tabulated_value);
+
+
+
+ }
+
+void t_table(double alpha, int DF,double TS)
+{
+
+   FILE *fp;
+   double tabulated_value;
+    if ((fp=fopen("t_table.txt","r"))==NULL)
+    {
+        cout<<"Can't open the file";
+        cout<<endl;
+        exit(1);
+    }
+
+    char s1[50],s2[50],s3[50];
+    int t1;
+    double t2,t3;
+    fscanf(fp,"%*[^\n]\n");
+
+    while(!feof(fp))
+    {
+        fscanf(fp,"%s %s  %s", s1,s2,s3);
+        t2=std::stod(s2);
+        t1=std::stoi(s1);
+        t3=std::stod(s3);
+
+      if(t1==DF && t2==alpha)
+      {
+          tabulated_value=t3;
+          break;
+      }
+    }
+    fclose(fp);
+
+    cout<<tabulated_value;
+
+     interpretation(TS,tabulated_value);
+
+}
+
+
 void  t_z_test(const vector<double>&a, const vector<double>&b)
 {
     double Ua=0, Ub=0, TS,n,m,SSa,SSb,SSp,DF,X,Y,sum_diff_a=0,sum_diff_b=0;
@@ -34,8 +156,6 @@ void  t_z_test(const vector<double>&a, const vector<double>&b)
 
     SSa=sum_diff_a/(n-1);
 
-    //cout<<SSa;
-
     for(int i=0;i<m;i++)
     {
         double temp=0;
@@ -48,20 +168,31 @@ void  t_z_test(const vector<double>&a, const vector<double>&b)
 
     SSp=((n-1)*SSa+(m-1)*SSb)/(n+m-2);
 
-    TS=(X-Y)/(sqrt(SSp*((1/n)+(1/m))));
+    TS=fabs((X-Y)/(sqrt(SSp*((1/n)+(1/m)))));
     cout<<TS;
 
    cout<<"Enter the level of significance : ";
    double alpha;
    cin>>alpha;
+   alpha=(alpha/2)/100;
 
+   if(DF<30)
+   {
+       t_table(alpha, DF,TS);
+   }
 
+   else
+   {
+      z_table(alpha,TS);
+
+   }
 
 }
 
+
 void pair_t_test(const vector<double>&a, const vector<double>&b)
 {
-    double w=0,mean,TS,n,Sw,ss=0,test, DF;
+    double w=0,mean,TS,n,Sw,ss=0,test, DF, tabulated_value;
     n=a.size();
 
     DF=n-1;
@@ -71,28 +202,63 @@ void pair_t_test(const vector<double>&a, const vector<double>&b)
         ss+=pow((a[i]-b[i]),2);
         w+=(a[i]-b[i]);
     }
-    //cout<<w;
+
     mean=w/n;
     Sw=sqrt((ss-n*mean*mean)/(n-1));
-   // cout<<Sw;
+
 
    test=(sqrt(n)*mean)/Sw;
 
    TS=fabs(test);
 
-   cout<<TS;
+   cout<<TS<<endl;
 
    //enter the error limit
-   cout<<"Enter the level of significance : ";
+   cout<<"Enter the level of significance (error limit from 1% to 20%):\n";
    double alpha;
    cin>>alpha;
 
-}
+   alpha=(alpha/2)/100;
 
+   FILE *fp;
+
+    if ((fp=fopen("t_table.txt","r"))==NULL)
+    {
+        cout<<"Can't open the file";
+        cout<<endl;
+        exit(1);
+    }
+
+    char s1[50],s2[50],s3[50];
+    int t1;
+    double t2,t3;
+    fscanf(fp,"%*[^\n]\n");
+
+    while(!feof(fp))
+    {
+        fscanf(fp,"%s %s  %s", s1,s2,s3);
+        t2=std::stod(s2);
+        t1=std::stoi(s1);
+        t3=std::stod(s3);
+
+      if(t1==DF && t2==alpha)
+      {
+          tabulated_value=t3;
+          break;
+      }
+
+    }
+    fclose(fp);
+
+    cout<<tabulated_value;
+
+     interpretation(TS,tabulated_value);
+
+}
 
 void start_hypothesis_test()
 {
-   // double class1[1000];
+
    vector<string>class1;
    vector<string>class2;
 
@@ -100,16 +266,8 @@ void start_hypothesis_test()
    vector<double>grp2;
 
    string var[2];
-   //FILE *file;
-   /*if ((file=fopen("aaaa.txt","r"))==NULL)
-    {
-        cout<<"Can't open the file";
-        cout<<endl;
-        exit(1);
-    }*/
+
    int line=0;
-   //int p=0;
-  // char str[1000];
 
   fstream newfile;
 
@@ -120,7 +278,6 @@ void start_hypothesis_test()
       while(getline(newfile,str))
       {
           line++;
-          //cout<<str<<endl;
           if(line==1)
             {
           stringstream data(str);
@@ -128,7 +285,6 @@ void start_hypothesis_test()
 
           while(data>>reg)
             {
-                //cout<<reg<<endl;
                  class1.push_back(reg);
             }
           }
@@ -142,76 +298,24 @@ void start_hypothesis_test()
 
             while(data>>reg)
             {
-                //cout<<reg<<" ";
                 class2.push_back(reg);
             }
         }
 
       }
 
-
-
-
-
   }
+
   newfile.close();
-
-
-  /*
-   while(fscanf(file,"%[^\n]\n",str)!=EOF)
-    {
-        line++;
-        if(line==1){
-
-        stringstream data(str);
-
-            string reg;
-
-            while(data>>reg)
-            {
-                //cout<<reg<<" ";
-                class1.push_back(reg);
-            }
-        }
-
-        else
-        {
-            stringstream data(str);
-
-            string reg;
-
-            while(data>>reg)
-            {
-                //cout<<reg<<" ";
-                class2.push_back(reg);
-            }
-        }
-
-    }  */
-    //fclose(file);
-
-   /* for(int t=0;t<class1.size();t++)
-    {
-        cout<<class1[t]<<endl;
-    }
-
-    cout<<endl;
-     for(int t=0;t<class2.size();t++)
-    {
-        cout<<class2[t]<<endl;
-    }*/
 
     var[0]=class1[0];
     var[1]=class2[0];
-
-   // cout<<var[0]<<var[1];
 
    for(int i=1;i<class1.size();i++)
     {
         double n;
         n=std:: stof(class1[i]);
         grp1.push_back(n);
-        //cout<<n<<endl;
     }
 
     for(int i=1;i<class2.size();i++)
@@ -219,7 +323,7 @@ void start_hypothesis_test()
         double n;
         n=std:: stof(class2[i]);
         grp2.push_back(n);
-        //cout<<n<<endl;
+
     }
 
     cout<<"The provided dataset is :\n\n";
@@ -232,7 +336,6 @@ void start_hypothesis_test()
 
     transform(var[0].begin(),var[0].end(),var[0].begin(),::tolower);
      transform(var[1].begin(),var[1].end(),var[1].begin(),::tolower);
-    //cout<<var[0];
 
     if(var[0]=="before" && var[1]=="after")
     {
@@ -243,6 +346,5 @@ void start_hypothesis_test()
      {
         t_z_test(grp1,grp2);
      }
-
 
 }

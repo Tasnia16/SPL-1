@@ -205,11 +205,6 @@ cout<<endl;
  cout << "(" << d[0] << ")" << endl;
 }
 
-
-
-
-
-
 void poly_reg()
 {
     FILE *fp2;
@@ -253,7 +248,6 @@ void poly_reg()
 
             while(data>>reg)
             {
-                //cout<<reg<<" ";
                 s.push_back(reg);
             }
         }
@@ -264,7 +258,6 @@ void poly_reg()
         double n;
         n=std:: stof(s[i]);
         x.push_back(n);
-        //cout<<n<<endl;
     }
 
      for(int j=1;j<s.size();j=j+2)
@@ -272,12 +265,9 @@ void poly_reg()
         double m;
         m=std:: stof(s[j]);
         y.push_back(m);
-        //cout<<n<<endl;
     }
 
 
     calculate_poly_reg(x,y);
-   // cout<<"\naaaaaaaaaaaaaaaaaaaaahhhhhhhhhh";
-
 
 }

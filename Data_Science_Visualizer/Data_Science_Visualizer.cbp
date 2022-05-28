@@ -34,7 +34,9 @@
 		</Compiler>
 		<Unit filename="ANOVA_test.cpp" />
 		<Unit filename="Classify_GroupData.cpp" />
+		<Unit filename="F_cal.cpp" />
 		<Unit filename="GroupData_Classification.h" />
+		<Unit filename="K_MEANS.cpp" />
 		<Unit filename="Logistic_reg.cpp" />
 		<Unit filename="Polynomial_reg.cpp" />
 		<Unit filename="Regression.cpp" />
@@ -45,6 +47,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="polynomial_reg.h" />
 		<Unit filename="regression.h" />
+		<Unit filename="two_factor_ANOVA.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
