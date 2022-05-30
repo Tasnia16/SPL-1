@@ -9,7 +9,7 @@
 
 1644734195 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\plz.h
 
-1653753914 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.cpp
+1653847135 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\regression.cpp
 	<bits/stdc++.h>
 	<stdlib.h>
 	<vector>
@@ -36,7 +36,7 @@
 	<cstring>
 	"regression.h"
 
-1653717388 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\polynomial_reg.cpp
+1653839309 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\polynomial_reg.cpp
 	<bits/stdc++.h>
 	<stdlib.h>
 	<vector>
@@ -65,26 +65,168 @@
 
 1651479886 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\hypothesis_test.h
 
-1653684461 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\testing_hypothesis.cpp
+1653778754 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\testing_hypothesis.cpp
 	<bits/stdc++.h>
 	<stdlib.h>
 	"hypothesis_test.h"
 
-1653753044 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\anova_test.cpp
+1653840674 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\anova_test.cpp
 	<bits/stdc++.h>
 	"anova_test.h"
 
-1653686786 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\anova_test.h
+1653840722 c:\users\acer\onedrive\desktop\spl\data_science_visualizer\anova_test.h
 
-1653713631 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\two_factor_anova.cpp
+1653840530 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\two_factor_anova.cpp
 	<bits/stdc++.h>
 	"anova_test.h"
 
-1653717214 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\f_cal.cpp
+1653841028 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\f_cal.cpp
 	<bits/stdc++.h>
 	"anova_test.h"
 
-1653752035 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\k_means.cpp
+1653841460 source:c:\users\acer\onedrive\desktop\spl\data_science_visualizer\k_means.cpp
 	<bits/stdc++.h>
 	"regression.h"
+
+1653840674 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\anova_test.cpp
+	<bits/stdc++.h>
+	"anova_test.h"
+
+1653840722 c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\anova_test.h
+
+1653717429 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\classify_groupdata.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	<fstream>
+	"GroupData_Classification.h"
+	"hypothesis_test.h"
+	"anova_test.h"
+
+1651476541 c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\groupdata_classification.h
+
+1651479886 c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\hypothesis_test.h
+
+1653841028 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\f_cal.cpp
+	<bits/stdc++.h>
+	"anova_test.h"
+
+1653841460 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\k_means.cpp
+	<bits/stdc++.h>
+	"regression.h"
+
+1653753613 c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\regression.h
+
+1651471950 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\logistic_reg.cpp
+	<bits/stdc++.h>
+	"logictic_reg.h"
+
+1648881326 c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\logictic_reg.h
+
+1653752667 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\main.cpp
+	<bits/stdc++.h>
+	"regression.h"
+	"logictic_reg.h"
+	"GroupData_Classification.h"
+
+1653849046 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\polynomial_reg.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	<vector>
+	<string>
+	<math.h>
+	<cstring>
+	"polynomial_reg.h"
+
+1653848968 c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\polynomial_reg.h
+
+1653848968 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\regression.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	<vector>
+	<string>
+	<math.h>
+	<cstring>
+	<windows.h>
+	"regression.h"
+	"polynomial_reg.h"
+
+1653778754 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\testing_hypothesis.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"hypothesis_test.h"
+
+1653840530 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer_2\two_factor_anova.cpp
+	<bits/stdc++.h>
+	"anova_test.h"
+
+1653840674 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\anova_test.cpp
+	<bits/stdc++.h>
+	"anova_test.h"
+
+1653840722 c:\users\acer\onedrive\desktop\new\data_science_visualizer\anova_test.h
+
+1653717429 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\classify_groupdata.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	<fstream>
+	"GroupData_Classification.h"
+	"hypothesis_test.h"
+	"anova_test.h"
+
+1651476541 c:\users\acer\onedrive\desktop\new\data_science_visualizer\groupdata_classification.h
+
+1651479886 c:\users\acer\onedrive\desktop\new\data_science_visualizer\hypothesis_test.h
+
+1653858038 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\f_cal.cpp
+	<bits/stdc++.h>
+	"anova_test.h"
+
+1653876644 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\k_means.cpp
+	<bits/stdc++.h>
+	"regression.h"
+
+1653753613 c:\users\acer\onedrive\desktop\new\data_science_visualizer\regression.h
+
+1651471950 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\logistic_reg.cpp
+	<bits/stdc++.h>
+	"logictic_reg.h"
+
+1648881326 c:\users\acer\onedrive\desktop\new\data_science_visualizer\logictic_reg.h
+
+1653752667 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\main.cpp
+	<bits/stdc++.h>
+	"regression.h"
+	"logictic_reg.h"
+	"GroupData_Classification.h"
+
+1653849046 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\polynomial_reg.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	<vector>
+	<string>
+	<math.h>
+	<cstring>
+	"polynomial_reg.h"
+
+1653848968 c:\users\acer\onedrive\desktop\new\data_science_visualizer\polynomial_reg.h
+
+1653876778 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\regression.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	<vector>
+	<string>
+	<math.h>
+	<cstring>
+	<windows.h>
+	"regression.h"
+	"polynomial_reg.h"
+
+1653778754 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\testing_hypothesis.cpp
+	<bits/stdc++.h>
+	<stdlib.h>
+	"hypothesis_test.h"
+
+1653858072 source:c:\users\acer\onedrive\desktop\new\data_science_visualizer\two_factor_anova.cpp
+	<bits/stdc++.h>
+	"anova_test.h"
 

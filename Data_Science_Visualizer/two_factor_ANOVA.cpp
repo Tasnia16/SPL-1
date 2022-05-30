@@ -21,6 +21,7 @@ bool isNumber1(const string& str)
 
 void calculation_part()
 {
+    string s1="column", s2="row";
     correction_factor=(grand_total*grand_total)/grand_count;
     double row_sum[row],col_sum[column];
 
@@ -86,8 +87,8 @@ void calculation_part()
     fc=msc/mse;
     fr=msr/mse;
 
-    f_table_calc(DF,dfc,fc);
-    f_table_calc(DF,dfr,fr);
+    f_table_calc(DF,dfc,fc,s1);
+    f_table_calc(DF,dfr,fr,s2);
 
 
 
@@ -145,18 +146,6 @@ void two_factor_anova()
           }
       }
 
-
-      cout<<"\nExtracted values are : ";
-      cout<<endl;
-      for(int i=0;i<row;i++)
-      {
-          for(int j=0;j<column;j++)
-          {
-              cout<<array_2d[i][j]<<" ";
-              grand_total+=array_2d[i][j];
-          }
-          cout<<endl;
-      }
 
       grand_count=row*column;
 

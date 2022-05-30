@@ -8,6 +8,61 @@
 #include"regression.h"
 #include"polynomial_reg.h"
 using namespace std;
+int sample_size;
+const int ALPHABET = 26;
+struct TrieNode
+{
+    struct TrieNode *children[ALPHABET];
+    bool end_flow;
+};
+
+struct TrieNode *getNode(void)
+{
+    struct TrieNode *pNode =  new TrieNode;
+
+    pNode->end_flow = false;
+
+      for(int i=0;i<ALPHABET; i++)
+        {
+           pNode->children[i] = NULL;
+        }
+    return pNode;
+}
+
+void insert(struct TrieNode *root, string key)
+{
+    struct TrieNode *pCrawl = root;
+
+    for (int i = 0; i < key.length(); i++)
+    {
+        int index = key[i] - 'a';
+        if (!pCrawl->children[index])
+            pCrawl->children[index] = getNode();
+
+        pCrawl = pCrawl->children[index];
+    }
+    pCrawl->end_flow = true;
+}
+
+bool search(struct TrieNode *root, string key)
+{
+    struct TrieNode *pCrawl = root;
+
+    for (int i = 0; i < key.length(); i++)
+    {
+        int index = key[i] - 'a';
+
+        if (!pCrawl->children[index])
+        {
+            return false;
+
+        }
+
+        pCrawl = pCrawl->children[index];
+    }
+
+    return (pCrawl->end_flow);
+}
 
 COORD coord= {0,0}; // this is global variable
 COORD co={0};
@@ -84,7 +139,7 @@ void custom_test(const vector<string>&variable,int button)
 
     }
 
-    poly_reg();
+    poly_reg(button);
 }
 
 void correlation_coeeficient_interpretation(double r,const vector<string>&variable)
@@ -213,7 +268,6 @@ void calculation(const vector<double>&x , const vector<double>&y,const vector<st
      double mean_y=0.0;
     /* double alpha=0.0;
      double beta=0.0;
-
      double alpha2=0.0;
      double beta2=0.0;*/
 
@@ -296,18 +350,6 @@ void ShowData(FILE *fp)
 
             string VAR;
 
-            while(DATA>>VAR)
-            {
-                int BOOL;
-                      BOOL=IS_NUM(VAR);
-                      if(BOOL==1)
-                      {
-                          k_means(fp);
-                          fclose(fp);
-                          return;
-                      }
-            }
-
         //cout<<"____________________________________\n";
         //cout<<"|"<<str<<setw(20)<<"|"<<s<<setw(5)<<endl;
 
@@ -332,6 +374,16 @@ void ShowData(FILE *fp)
             while(data1>>var)
             {
                 variable.push_back(var);
+
+                int BOOL;
+                      BOOL=IS_NUM(var);
+                      cout<<BOOL;
+                      if(BOOL==1)
+                      {
+                          k_means(fp);
+                          fclose(fp);
+                          return;
+                      }
             }
         }
 
@@ -361,7 +413,6 @@ void ShowData(FILE *fp)
     cout<<endl;
     k=k+2;
     gotoxy(20,k);
-
 */
     cout<<"The variables are : "<<endl;
     // gotoxy(20,k+1);
@@ -374,6 +425,7 @@ void ShowData(FILE *fp)
         cout<<variable[i]<<endl;
     }
     cout<<endl;
+
 
 
     for(long long int i=0;i<s.size();i=i+2)
@@ -391,20 +443,67 @@ void ShowData(FILE *fp)
         y.push_back(m);
         //cout<<n<<endl;
     }
-    int sample_size;
+
     sample_size=x.size();
     cout<<endl;
     cout<<"        The sample size is : "<< sample_size <<endl;
     cout<<endl;
+
+    if(sample_size>25000)
+    {
+        system("Color 7C");
+         cout<<"Warning !! Too large data "<<endl;
+         cout<<"Choose 1st 5000 data as a sample "<<endl;
+    }
     /*cout<<"\n**********Which variable you want to make independent variable : ********"<<endl;
     cout<<"___________________________________________________________________________"<<endl;
      for(long long int i=0;i<variable.size();i++)
     {
         cout<<"Press " <<i+1<<" to set variable "<< "'"<<variable[i]<<"'"<<" as independent"<<endl;
     }*/
-    int button;
-    cin>>button;
 
+
+    int button;
+
+    string keys[]={"age", "gender", "experience","country", "height", "study","temperature", "drug","medicine","x" };
+
+    vector<string>vs;
+    vs.push_back(variable[0]);
+    vs.push_back(variable[1]);
+
+    transform(vs[0].begin(),vs[0].end(),vs[0].begin(),::tolower);
+    transform(vs[1].begin(),vs[1].end(),vs[1].begin(),::tolower);
+
+    int n = sizeof(keys)/sizeof(keys[0]);
+
+    struct TrieNode *root = getNode();
+
+    // Construct trie
+    for (int i = 0; i < n; i++)
+        {
+             insert(root, keys[i]);
+        }
+
+    int p,q;
+
+    search(root, vs[0])? p=1 :p=0;
+    search(root, vs[1])? q=1 :q=0;
+
+     if(p==0 && q==0)
+     {
+         button=1;
+     }
+
+     else
+        {
+
+        if(p==1 && q==0)
+        button=1;
+
+         else
+         button=2;
+
+     }
 
     fclose(fp);
 
@@ -436,4 +535,3 @@ void reg_input()
     ShowData(fp);
 
 }
-

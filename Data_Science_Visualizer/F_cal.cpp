@@ -3,21 +3,24 @@
 using namespace std;
 
 
-void result_interpretation(double tabulated_value, double TS)
+void result_interpretation(double tabulated_value, double TS,string s)
 {
-    if(TS>tabulated_value)
+    if(fabs(TS)>tabulated_value)
     {
-        cout<<"There is significant difference among the groups"<<endl;
+        cout<<endl<<"          Test statistic "<<fabs(TS)<<">"<<"Tabulated value  " <<tabulated_value<<endl;
+        cout<<"                There is significant difference among the "<<s<<"  variables"<<endl;
+
     }
 
     else
     {
-        cout<<"There is no significant difference among the groups"<<endl;
+        cout<<endl<<"           Test statistic "<<fabs(TS)<<"<"<<"Tabulated value  " <<tabulated_value<<endl;
+        cout<<"                 There is no significant difference among the "<<s<<" variables"<<endl;
     }
 
 }
-void f_table_calc(int a,int b,double c)
-{
+void f_table_calc(int a,int b,double c,string s)
+{//cout<<a<<" "<<b<<" "<<c;
 
      FILE *fp;
    double tabulated_value;
@@ -40,7 +43,7 @@ void f_table_calc(int a,int b,double c)
         t1=std::stoi(s1);
         t3=std::stod(s3);
 
-      if(t1==b && t2==a)
+      if(t1==a && t2==b)
       {
           tabulated_value=t3;
           break;
@@ -48,8 +51,8 @@ void f_table_calc(int a,int b,double c)
     }
     fclose(fp);
 
-    cout<<tabulated_value;
+   // cout<<tabulated_value;
 
-    result_interpretation(tabulated_value,c);
+    result_interpretation(tabulated_value,c,s);
 
 }

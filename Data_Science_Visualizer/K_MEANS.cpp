@@ -6,7 +6,7 @@ vector<string>v;
 void k_means(FILE *fp)
 {
     int i,j,n,k,l,x,count,flag,size=0;
-	double Centx[100][100],Centy[100][100],Graph[100][100],dist,min,Group[100][100],totalx,totaly;
+	double Centx[200][200],Centy[200][200],Graph[200][200],dist,min,Group[200][200],totalx,totaly;
 	double *Ax,*Ay;
 
     char str[1000];
@@ -88,7 +88,7 @@ void k_means(FILE *fp)
 				}
 			}
 		}
-		l+=1;
+		l++;
 
 		for(i=0;i<k;i++)
 		{
@@ -135,10 +135,10 @@ void k_means(FILE *fp)
 		cout<<"The objects in Cluster under the centroid (" <<Centx[l-1][i]<<" , "<<Centy[l-1][i]<<" ) are:"<<endl;
 		for(j=0;j<n;j++)
 		{
-			if(Group[l-1][j]==i)
-			{
-				cout<<"( "<<Ax[j]<<" , "<<Ay[j]<<" )"<<endl;
-			}
+			  if(Group[l-1][j]==i)
+			  {
+				 cout<<"( "<<Ax[j]<<" , "<<Ay[j]<<" )"<<endl;
+			  }
 		}
 	}
 }

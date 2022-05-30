@@ -74,7 +74,8 @@ void calculation_anovaTable(int line)
   denominator=total_cnt-line;
   TS=BMS/WMS;
   cout<<TS<<endl;
-  f_table_calc(numirator,denominator,TS);
+  string s3="group";
+  f_table_calc(numirator,denominator,TS,s3);
 }
 
 

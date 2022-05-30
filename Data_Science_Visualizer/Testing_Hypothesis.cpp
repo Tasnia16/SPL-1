@@ -7,11 +7,11 @@ void interpretation(double TS,double tabulated_value)
  {
      if(TS>tabulated_value)
      {
-         cout<<"There is significant difference before and after experiment"<<endl;
+         cout<<"\nThere is significant difference before and after experiment"<<endl;
      }
 
      else
-         cout<<"There is no significant difference before and after experiment"<<endl;
+         cout<<"\nThere is no significant difference before and after experiment"<<endl;
  }
 
  void z_table(double alpha, double TS)
@@ -78,7 +78,7 @@ void interpretation(double TS,double tabulated_value)
 
 newfile1.close();
 
-cout<<"\n"<<tabulated_value;
+cout<<"\n"<<tabulated_value<<endl;;
 
 interpretation(TS,tabulated_value);
 
@@ -118,7 +118,7 @@ void t_table(double alpha, int DF,double TS)
     }
     fclose(fp);
 
-    cout<<tabulated_value;
+    cout<<tabulated_value<<endl;
 
      interpretation(TS,tabulated_value);
 
@@ -169,7 +169,7 @@ void  t_z_test(const vector<double>&a, const vector<double>&b)
     SSp=((n-1)*SSa+(m-1)*SSb)/(n+m-2);
 
     TS=fabs((X-Y)/(sqrt(SSp*((1/n)+(1/m)))));
-    cout<<TS;
+    cout<<"Test statistic : " << TS<<endl;
 
    cout<<"Enter the level of significance : ";
    double alpha;
